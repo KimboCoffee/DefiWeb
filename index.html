@@ -214,31 +214,6 @@
             display: block;
         }
 
-        /* Crypto Links */
-        .crypto-links a {
-            background-color: #00D1B2;
-            color: #0a0a1a;
-            padding: 8px 15px;
-            margin: 0 5px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-
-        body.light-mode .crypto-links a {
-            background-color: #007a66;
-            color: #f0f0f5;
-        }
-
-        .crypto-links a:hover {
-            background-color: #00a88f;
-        }
-
-        body.light-mode .crypto-links a:hover {
-            background-color: #005a4c;
-        }
-
         /* Mode Toggle Button */
         .mode-toggle {
             background: none;
@@ -540,13 +515,16 @@
                 </div>
             </div>
             <a href="#prices">Crypto Prices</a>
-            <a href="#contact">Contact</a>
-            <div class="crypto-links">
-                <a href="https://bitcoin.org/">Bitcoin</a>
-                <a href="https://solana.com/">Solana</a>
-                <a href="https://ethereum.org/">Ethereum</a>
-                <a href="https://polygon.technology/">Polygon</a>
+            <div class="dropdown">
+                <a href="#">Top Cryptos</a>
+                <div class="dropdown-content">
+                    <a href="https://bitcoin.org/">Bitcoin</a>
+                    <a href="https://solana.com/">Solana</a>
+                    <a href="https://ethereum.org/">Ethereum</a>
+                    <a href="https://polygon.technology/">Polygon</a>
+                </div>
             </div>
+            <a href="#contact">Contact</a>
             <button class="mode-toggle" onclick="toggleMode()">Light Mode</button>
         </nav>
     </header>
