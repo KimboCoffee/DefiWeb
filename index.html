@@ -102,7 +102,7 @@
         /* Header */
         header {
             background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
-            padding: 20px 50px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -117,13 +117,24 @@
         }
 
         header h1 {
-            font-size: 28px;
+            font-size: 24px;
             color: #00D1B2;
             text-transform: uppercase;
         }
 
         body.light-mode header h1 {
             color: #007a66;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #e0e0e0;
+        }
+
+        body.light-mode .hamburger {
+            color: #1a1a3d;
         }
 
         nav {
@@ -134,7 +145,7 @@
         nav a {
             color: #e0e0e0;
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 10px;
             font-size: 16px;
             transition: color 0.3s;
         }
@@ -155,7 +166,7 @@
         .dropdown {
             position: relative;
             display: inline-block;
-            margin: 0 15px;
+            margin: 0 10px;
         }
 
         .dropdown > a {
@@ -251,6 +262,7 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            padding-top: 80px; /* Account for fixed header */
         }
 
         .hero h2 {
@@ -465,21 +477,50 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            header {
+                padding: 20px;
+                justify-content: space-between;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
+                padding: 20px;
+            }
+
+            body.light-mode nav {
+                background: linear-gradient(90deg, #e0e0f5, #d0d0ea);
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a, .dropdown {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .mode-toggle {
+                margin: 10px 0;
+                margin-left: 0;
+            }
+
             .hero h2 {
                 font-size: 32px;
             }
 
             .hero p {
                 font-size: 16px;
-            }
-
-            header {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            nav a {
-                margin: 0 10px;
             }
 
             .crypto-table {
@@ -503,7 +544,8 @@
 
     <header>
         <h1>DefiWeb3</h1>
-        <nav>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <nav id="nav-menu">
             <a href="#home">Home</a>
             <div class="dropdown">
                 <a href="#features">DeFi</a>
@@ -530,8 +572,8 @@
     </header>
 
     <section class="hero" id="home">
-        <h2>DefiWeb3</h2>
-        <p>Own the ultimate domain for your DeFi or Web3 project. Build on Ethereum, Solana, Polygon, and more.</p>
+        <h2>Welcome to DefiWeb3</h2>
+        <p>Discover the ultimate hub for your DeFi or Web3 initiatives, where innovation meets blockchain excellence. Seamlessly develop, deploy, and scale decentralized applications, financial protocols, and digital ecosystems on top-tier networks like Ethereum for robust smart contracts, Solana for lightning-fast transactions, Polygon for cost-effective scaling, and many more. Unlock tools for lending, trading, staking, and tokenized assets in a secure, interconnected environment designed to empower creators and users alike.</p>
         <button class="wallet-button">Connect Wallet</button>
     </section>
 
@@ -572,6 +614,11 @@
             body.classList.toggle('light-mode');
             body.classList.toggle('dark-mode');
             button.textContent = body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode';
+        }
+
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
         }
 
         // Live Crypto Prices
