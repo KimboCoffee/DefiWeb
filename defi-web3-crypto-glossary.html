@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFiWeb3.io - Crypto, Web3 & DeFi Glossary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+            scroll-behavior: smooth;
+        }
+
+        /* Blockchain Background Animation */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a1a, #1a1a3d);
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 209, 178, 0.3) 0%, transparent 70%);
+            animation: pulse 10s infinite;
+        }
+
+        .background::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9Ijg2LjYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDBMIDAgNDMuM0wgMCA4Ni42TCA1MCA4Ni42TCAxMDAgNDMuM0wgMTAwIDB6IiBzdHJva2U9IiMwMEQxQjIiIGZpbGw9Im5vbmUiLz48bGluZSB4MT0iNTAiIHkxPSIwIiB4Mj0iMCIgeTI9IjQzLjMiIHN0cm9rZT0iIzAwRDFCMiIvPjpsaW5lIHgxPSI1MCIgeTE9IjAiIHgyPSIxMDAiIHkyPSI0My4zIiBzdHJva2U9IiMwMEQxQjIiLz48bGluZSB4MT0iMCIgeTE9IjQzLjMiIHgyPSI1MCIgeTI9Ijg2LjYiIHN0cm9rZT0iIzAwRDFCMiIvPjpsaW5lIHgxPSIxMDAiIHkxPSI0My4zIiB4Mj0iNTAiIHkyPSI4Ni42IiBzdHJva2U9IiMwMEQxQjIiLz48bGluZSB4MT0iMCIgeTE9IjQzLjMiIHgyPSIxMDAiIHkyPSI0My4zIiBzdHJva2U9IiMwMEQxQjIiLz48L3N2Zz4=');
+            background-repeat: repeat;
+            opacity: 0.2;
+        }
+
+        .background .particle {
+            position: absolute;
+            background: #00D1B2;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 15s infinite linear;
+        }
+
+        .particle:nth-child(1) { width: 8px; height: 8px; top: 20%; left: 10%; animation-duration: 20s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; top: 50%; left: 30%; animation-duration: 25s; }
+        .particle:nth-child(3) { width: 7px; height: 7px; top: 70%; left: 60%; animation-duration: 18s; }
+        .particle:nth-child(4) { width: 9px; height: 9px; top: 30%; left: 80%; animation-duration: 22s; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100vw, -100vh); }
+        }
+
+        /* Header and Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
+            opacity: 0.95;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #00D1B2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #00D1B2;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #e0e0e0;
+            margin: 4px 0;
+            transition: 0.3s;
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            nav ul {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* Glossary Section */
+        .glossary {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
+        }
+
+        .glossary h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #00D1B2;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        /* Search Bar with Autocomplete */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+            display: flex;
+        }
+
+        #search-input {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00D1B2;
+            color: #e0e0e0;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+
+        #search-button {
+            padding: 1rem;
+            background: #00D1B2;
+            border: none;
+            color: #0a0a1a;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        #search-button:hover {
+            background: #00a08f;
+        }
+
+        #autocomplete-list {
+            position: absolute;
+            width: 100%;
+            background: #1a1a3d;
+            border: 1px solid #00D1B2;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+            top: 100%;
+        }
+
+        .autocomplete-item {
+            padding: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .autocomplete-item:hover {
+            background: rgba(0, 209, 178, 0.2);
+        }
+
+        /* Alphabet Filter */
+        #alphabet-filter {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        #alphabet-filter button {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00D1B2;
+            color: #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #alphabet-filter button:hover {
+            background: rgba(0, 209, 178, 0.2);
+        }
+
+        /* Glossary List */
+        #glossary-list {
+            margin: 0 auto;
+        }
+
+        #glossary-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #glossary-list td {
+            padding: 1rem;
+            text-align: left;
+            vertical-align: top;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #glossary-list td:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px #00D1B2;
+        }
+
+        #glossary-list span {
+            color: #00D1B2;
+            text-decoration: underline;
+            cursor: help;
+        }
+
+        #glossary-list p {
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1a1a3d;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <header>
+        <div class="logo">DeFiWeb3.io</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Glossary.html">Glossary</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <main>
+        <section id="glossary" class="glossary">
+            <h2>Crypto, Web3 & DeFi Glossary</h2>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search terms... (e.g., Web3)">
+                <button id="search-button">Search</button>
+                <div id="autocomplete-list"></div>
+            </div>
+            <div id="alphabet-filter"></div>
+            <div id="glossary-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 DeFiWeb3.io - All Rights Reserved
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navUl = document.querySelector('nav ul');
+
+        hamburger.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Scrolled Header
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                document.querySelector('header').classList.add('scrolled');
+            } else {
+                document.querySelector('header').classList.remove('scrolled');
+            }
+        });
+
+        // Glossary Data from the site
+        const glossaryData = [
+            { term: '51% attack', definition: 'a 51% attack refers to Proof-of-Work blockchains, when a group of miners takes control of 51% of the hashrate to attack the network. 51% attacks are uncommon in decentralised blockchains as they require so much collusion between parties, but they are a potential existential threat to the network. A 51% attack on Bitcoin or Ethereum would be very difficult due to the number of miners participating in each network around the world.' },
+            { term: 'APY', definition: 'APY stands for Annual Percentage Yield. In DeFi, the APY refers to the amount of interest a user can expect to accrue over the course of a year by depositing their assets into a pool. APY rates are commonly mentioned in reference to yield farming.' },
+            { term: 'Auditing', definition: 'in DeFi, auditing usually refers to the process of proofreading code for vulnerabilities. It’s standard industry practice for teams to hire a security firm to audit smart contracts before they get deployed on mainnet.' },
+            { term: 'Automated Market Makers', definition: 'automated market makers allow users to add liquidity and trade assets permissionlessly, without using a centralised exchange. They’re run by smart contracts and use algorithms to calculate the price of assets.' },
+            { term: 'Beacon chain', definition: 'Ethereum’s Beacon chain was deployed as Phase 0 of Serenity. The Beacon Chain will introduce proof-of-stake to the network. Once docked to mainnet Ethereum, the blockchain will make a transition from proof-of-work. After that, sharding will follow.' },
+            { term: 'Blue chips', definition: 'some DeFi projects have earned the reputation of being “blue chips” of the industry, meaning that they’re regarded as trusted staples of the ecosystem. Some of DeFi’s most notable blue chips today include Aave, Synthetix, and Maker.' },
+            { term: 'Bonding curve', definition: 'a bonding curve is a mechanism that determines the price of a token based in its supply. In its simplest terms, the price of a token increases on a bonding curve as the supply falls. Bonding curves have been used in several DeFi experiments to some success, including Unisocks, and RAC’s “Boy” cassette tape.' },
+            { term: 'Bridge', definition: 'in DeFi, bridges are used to connect networks together, often across Layer 1 and Layer 2. For example, sidechains such as xDAI and Skale use a two-way bridge to connect to Ethereum. Polygon, an Ethereum scaling solution that leverages Plasma and Proof-of-Stake, also uses a bridge.' },
+            { term: 'Channels', definition: 'channels facilitate multiple transactions off-chain, while submitting only two transactions to the settlement layer. They’re useful for increasing throughput at a low cost. On Ethereum, they come in two forms: state channels, and payment channels.' },
+            { term: 'Cold wallet', definition: 'a cold wallet is a type of crypto wallet, where the private key is stored offline. Cold wallets are often said to be more secure than many hot wallets because they cannot be compromised by an online attack. Cold wallets can take the form of paper, or hardware wallets like Ledger.' },
+            { term: 'Collateral', definition: 'collateral refers to assets that are locked inside a smart contract, usually to borrow other assets. In protocols like Aave, you can take out a Collateralised Debt Position using ETH to borrow stablecoins, which can be used elsewhere in DeFi.' },
+            { term: 'Collateralisation ratio', definition: 'the collateralisation ratio is the amount of collateral that must be provided in order to borrow from a lending pool. In DeFi, borrowing usually requires putting up collateral to secure the amount the user borrows. MakerDAO, for example, requires a collateralization ratio of 150% to borrow DAI.' },
+            { term: 'Composability', definition: 'composability is one of the core concepts of DeFi. Part of the magic of decentralised finance on Ethereum is that the protocols running on top of the network can be used interchangeably with one another. They can be combined in a variety of ways, allowing users to put their assets to work in a variety of ways through one smart contract. In other words, they are composable.' },
+            { term: 'Consensus', definition: 'consensus refers to an agreement reached between several entities. In crypto, consensus is an agreement between network participants to authenticate a transaction on the blockchain. Bitcoin uses a proof-of-work consensus mechanism, while Ethereum is moving towards proof-of-stake.' },
+            { term: 'Cross-chain', definition: 'cross-chain refers to the ability for two blockchains to operate with one another. In the future, coss-chain solutions could allow for interoperability between blockchains like Bitcoin and Ethereum, or Ethereum and Polkadot.' },
+            { term: 'DAO', definition: 'a DAO is a decentralised autonomous organisation. DAOs are programmed to run autonomously through smart contracts, and there’s no hierarchy between the members involved. Any decisions in a DAO are usually made through a governance vote, where members of the network must reach consensus for a proposal to pass. The most famous DAO launched on Ethereum in 2016, but met an ill fate when hackers siphoned millions worth of funds from the network. Several DAOs run on Ethereum today.' },
+            { term: 'Deflationary asset', definition: 'a deflationary asset is one whose supply reduces over time. When EIP-1559 is implemented on Ethereum, ETH will become a deflationary asset if there are enough transactions on the network.' },
+            { term: 'EIP-1559', definition: 'EIP-1559 is a change to Ethereum’s fee structure that will be implemented onto the network in 2021. It involves burning a “base fee” on transactions that would otherwise be paid to miners. Although EIP-1559 been unpopular with some miners because it will affect their revenue, it will make the price of transactions easier to predict and harden Ethereum’s economic policy by reducing the supply of ETH. Many members of the Ethereum community are therefore looking forward to the upgrade.' },
+            { term: 'ERC-20', definition: 'ERC-20 is the token standard for assets that run on Ethereum. While ETH is the Ethereum’s reserve currency, most other tokens that run on the network are ERC-20 tokens. Examples include DAI, MKR, and SNX.' },
+            { term: 'ERC-721', definition: 'ERC-721 is the token standard for most non-fungible tokens, otherwise known as NFTs. Unlike ERC-20 tokens, each ERC-721 token is unique, so it can not be interchanged with another. Because of this trait, ERC-721 tokens offer provable ownership and scarcity over the asset.' },
+            { term: 'EVM', definition: 'EVM stands for Ethereum Virtual Machine, the computational system that allows smart contracts to interact with one another to carry out functions on the network. The Ethereum Virtual Machine is the nucleus to Ethereum’s vast ecosystem, represented by thousands of computers rather than any physical entity.' },
+            { term: 'FDV', definition: 'FDV stands for Fully Diluted Valuation. The FDV refers to the price of a cryptocurrency multiplied by the maximum token supply. The ratio between the market cap and FDV is important because it can indicate if a token’s supply is due to inflate in the future.' },
+            { term: 'Flash Loans', definition: 'flash loans are an innovation pioneered by the lending protocol Aave. They allow anyone to instantly take out a loan for an unlimited amount, as long as they pay it back in the same transaction. Flash loans are a contentious innovation due to the role they’ve played in many attacks.' },
+            { term: 'Fragmentation', definition: 'in DeFi, fragmentation refers to liquidity that gets broken across different areas of the ecosystem. Fragmentation is generally considered a negative thing, because having sufficient liquidity locked in each pool is important for the health of the ecosystem.' },
+            { term: 'Frictionless', definition: 'using DeFi should ideally be frictionless, meaning that there are no difficulties in making transactions, interacting with protocols, and any other activities. It’s hoped that as DeFi matures, it will become more frictionless.' },
+            { term: 'Gas', definition: 'every transaction on Ethereum requires gas, which is a small amount of ETH paid to the network and miners. Gas is known as the fuel that powers the Ethereum network. It’s measured in gwei, which is a small denomination of ETH. Estimated gas prices can be found via websites such as ETH Gas Station and ETH Gas Watch.' },
+            { term: 'Governance', definition: 'Decentralised finance removes the need for any intermediaries, so no one party holds power over the network. DeFi protocols therefore rely on governance to reach decisions on how they are run, which are mostly made up of a project’s token holders. If a change is to be made to a decentralised protocol, the decision must usually be made through a governance vote.' },
+            { term: 'Hot Wallet', definition: 'hot wallets are wallets that are connected to the Internet. Although they’re considered less secure than cold wallets, they can be useful for gaining quick access to DeFi. A popular example of a hot wallet is the browser extension MetaMask.' },
+            { term: 'Immutability', definition: 'immutability is one of the core characteristics of blockchains like Ethereum. Transactions are immutable and irreversible; they cannot be changed. Similarly, once code is deployed onto Ethereum, it cannot be removed. This ensures that all activity on the blockchain can be verified.' },
+            { term: 'Impermanent Loss', definition: 'impermanent loss is often described as the difference in price between holding your assets versus locking them inside a protocol. Impermanent loss occurs when arbitrageurs take advantage of price changes of the tokens provided to a liquidity pool, leaving the provider with greater exposure to the less valuable token. For example, when the price of ETH increases on a centralised exchange, arbitrageurs can take advantage by buying ETH in an ETH/DAI pool while it’s cheap. This increases the amount of DAI and decreases the amount of ETH in the pool, allowing the arbitrageur to walk away with a profit. The loss is “impermanent” because it can readjust once the price decreases again; it only becomes a realised loss when the assets are removed from the pool.' },
+            { term: 'Interoperability', definition: 'interoperability in DeFi refers to the capability for networks to work together without facing a barrier. In DeFi, the concept of cross-chain interoperability is often discussed with reference to transactions between blockchains, such as Ethereum and Polkadot. Though DeFi is still in its infancy, it’s possible that we could be moving towards a world of cross-chain interoperability, where each chain works in conjunction with each other.' },
+            { term: 'KYC', definition: 'KYC stands for Know Your Customer. It’s a process used to verify customers for regulatory purposes. Monolith uses KYC during the onboarding process for new users, and you can learn more here.' },
+            { term: 'Layer 2', definition: 'Layer 2 is a framework that gets built on top of a Layer 1 blockchain to improve scalability. Ethereum is an example of a Layer 1 chain, and a number of Layer 2 solutions are being developed to increase the throughput of the network today.' },
+            { term: 'Ledger', definition: 'the ledger is the public record of transactions on a blockchain. Ledgers are distributed across many computers and can be run by anyone on the Internet, enabling the blockchain to achieve decentralisation.' },
+            { term: 'Liquidation', definition: 'in DeFi, a liquidation occurs when a user’s position in a lending pool gets closed, leading them to lose a portion of their collateral. Taking out a loan in a protocol like Aave requires providing an asset as collateral. The amount provided must meet a certain threshold relative to the amount borrowed. Liquidations can occur when the asset provided as collateral falls in value, as it means the threshold is lost.' },
+            { term: 'Liquidation threshold', definition: 'in DeFi, the liquidation threshold is the point at which a borrow position becomes undercollateralised. If the liquidation threshold is 50%, for example, the user becomes liquidated when the amount borrowed is worth 50% of the collateral value.' },
+            { term: 'Liquidity', definition: 'in DeFi, liquidity refers to the amount of assets in a specific market. DeFi works best when there is “good liquidity”, meaning that there is a sufficient supply of assets in a pool. BTC and ETH are the most liquid cryptocurrencies; selling a portion of the asset has less impact on the market price.' },
+            { term: 'Liquidity pools', definition: 'liquidity pools are used in DeFi protocols to allow users to lock assets in a smart contract in order to provide liquidity. These assets can then be used by other participants in the protocol for borrowing and other activities.' },
+            { term: 'Liquidity mining', definition: 'liquidity mining involves locking assets in a protocol in order to capture returns, otherwise known as yield. This is usually provided in the form of Liquidity Provider tokens, which accrue interest while the assets are locked.' },
+            { term: 'LTV ratio', definition: 'LTV stands for Loan-to-Value. The LTV ratio is used to determine how much a user can borrow against their collateral in a lending protocol.' },
+            { term: 'Mainnet', definition: 'the mainnet is the main network on which a blockchain protocol runs. When smart contracts get deployed onto Ethereum mainnet, they are live and immutable, meaning they cannot be changed. Mainnet is the opposite of the testnet, the area of the network where transactions are verified and recorded on the blockchain.' },
+            { term: 'Market cap', definition: 'the market cap, or market capitalization, of a cryptocurrency is the project’s total worth. It’s determined by the market price of the project’s token, multiplied by the total circulating supply.' },
+            { term: 'MEV', definition: 'MEV refers to the “maximum extractable value” or “miner extractable value” in Ethereum transactions that can be lost through frontrunning and gas fee bidding wars. As miners typically accept transactions to a block based on the highest bids, they are incentivised to increase the price of block space, which is what can lead to MEV.' },
+            { term: 'Money legos', definition: 'the composability of DeFi allows users to interact with applications in multiple ways. If a user deposits ETH to MakerDAO in order to borrow DAI, then uses Uniswap to exchange DAI for LINK, before staking LINK in a pool, it’s as if they’re stacking the activities on top of one another like building bricks. As DeFi is composable, it’s given rise to “money legos”, applications that allow anyone to interact with the network for a variety of activities in almost endless combinations.' },
+            { term: 'Multisig wallet', definition: 'a multisig wallet is a form of cryptocurrency wallet that requires two or more private keys to access and send a transaction. They’re considered more secure than regular wallets.' },
+            { term: 'NFTs', definition: 'NFT stands for “non-fungible token”. Unlike other assets such as ETH, NFTs are unique. They can not be exchanged for one another. They usually take the token standard ERC-721. As they’re not interchangeable, they can provide provable scarcity and ownership of an asset. NFTs first caught on in the digital art world, but they can also be used for music, film, royalties, gaming, and likely other uses we haven’t yet thought of.' },
+            { term: 'Nodes', definition: 'nodes form the core of a blockchain. They store all of the data in the ledger and stay connected to other computers on the network. In the case of full nodes, they are responsible for processing transactions and validating new blocks in the chain. Nodes are essential for keeping the blockchain decentralised and providing security to the network.' },
+            { term: 'Off-chain', definition: 'off-chain refers to any activity or data that is not part of the main blockchain itself. Off-chain transactions are those that happen outside of the blockchain, while off-chain data concerns that which is not stored on the network.' },
+            { term: 'On-chain', definition: 'on-chain refers to any activity or transactions that occur on the main blockchain. These activities get recorded permanently in the blockchain’s ledger.' },
+            { term: 'On-ramp', definition: 'a crypto on-ramp is a service that provides a way to exchange fiat money for cryptocurrencies. For example, Monolith’s crypto on-ramp allows users to purchase DAI or ETH with any Visa or Mastercard.' },
+            { term: 'Off-ramp', definition: 'an off-ramp is a service that provides a way to exchange cryptocurrencies for fiat money. Popular off-ramps include centralised exchanges.' },
+            { term: 'Optimistic rollups', definition: 'optimistic rollups are a type of Layer 2 solution that provide scalability to the Ethereum network. They work by grouping transactions in a cryptographic proof called a SNARK, and operate on a sidechain that runs parallel to Ethereum. Optimism is developing optimistic rollups for Ethereum.' },
+            { term: 'Oracles', definition: 'oracles are used to pull accurate data feeds into DeFi. They’re often used to gather the price of assets. An example of a decentralised oracle is Chainlink.' },
+            { term: 'Permissionless', definition: 'Bitcoin and Ethereum are described as “permissionless” systems; no-one needs to ask permission to participate in the network. Anyone can use the protocols without providing proof of identity, certification, or any other type of authentication.' },
+            { term: 'Plasma', definition: 'plasma is a type of scaling solution that uses Merkle trees to add an additional chain to the blockchain. This allows for fast, low-cost transactions as the data does not need to be stored on the ledger. Polygon uses plasma.' },
+            { term: 'Private key', definition: 'in crypto terms, a private key is a form of cryptography that gives access to digital assets. It can be used to allow an owner to unlock a crypto address. For this reason, your private key should never be shared with anyone.' },
+            { term: 'Programmable money', definition: 'Ethereum gives programmability to tokens on the network through smart contracts. As such, it’s often described as a programmable money network. Perhaps the purest form of programmable money is ETH, Ethereum’s reserve asset. However, ETH does not offer the same state guarantees as fiat money such as USD.' },
+            { term: 'Proof-of-Stake', definition: 'Proof-of-Stake is a consensus mechanism for achieving consensus on a blockchain. Ethereum is currently moving towards proof-of-stake. ETH holders can stake their ETH to become a validator to secure the network and create new blocks. Proof-of-stake makes it easier for participants to run a node, and is also less environmentally damaging than a proof-of-work system.' },
+            { term: 'Proof-of-Work', definition: 'Proof-of-Work is a consensus algorithm for a blockchain, where miners contribute computational effort to solve complex sums. This validates transactions and adds new blocks to the chain. Proof-of-Work prevents “double spend” transactions and is very difficult to attack, but it’s often criticised for its environmental impact. Bitcoin uses a proof-of-work consensus algorithm.' },
+            { term: 'Protocol', definition: 'Bitcoin and Ethereum are also examples of blockchain protocols. In DeFi, protocols are autonomous programs that run entirely on code. Popular DeFi protocols include Aave and Compound, used for lending and borrowing assets through smart contracts.' },
+            { term: 'Rug pull', definition: 'a rug pull is a term used to describe when someone withdraws a large amount of liquidity from a pool, as if they’re pulling the rug beneath everyone else who has deposited assets inside the pool. Rug pulls can cause significant drops in the price of an asset in a pool and are generally seen as a negative thing across the space.' },
+            { term: 'Scalability', definition: 'scalability refers to the degree to which a blockchain can scale. Scalability is one of the core requirements of a blockchain, alongside security and decentralisation. If blockchains are to see mass adoption, they need to be able to scale to accommodate more users. Ethereum is hoping to improve its scalability through Layer 2 solutions and its long-awaited upgrade, Serenity.' },
+            { term: 'Seed', definition: 'the Seed, or Seed Phrase, is used to unlock a wallet’s private key and public key. It’s a series of 12 or 24 words that are derived from the BIP39 word list. The seed is also referred to as the recovery phrase, and one seed can generate multiple private keys. Like the private key, you should never share your Seed with anyone.' },
+            { term: 'Serenity', definition: 'Serenity is another name for Ethereum 2.0, the next iteration of the Ethereum blockchain. It will see the network move from a proof-of-work to proof-of-stake consensus algorithm, and also involves the implementation of sharding to improve scalability. It’s scheduled to complete sometime in the next few years.' },
+            { term: 'Settlement layer', definition: 'Ethereum is often described as a global settlement layer, as it settles every transactions on the network. It’s the base chain for a new financial system known as DeFi, but it could become a network that settles more than financial transactions in the future. The settlement layer provides security to the whole ecosystem.' },
+            { term: 'Sharding', definition: 'sharding will roll out as part of Serenity with a view to making Ethereum more scalable. It involves adding 64 new chains or “shards” to spread the load of the network. It’s the final stage of Serenity. When complete, the full vision for Ethereum 2.0 should be realised.' },
+            { term: 'Sidechains', definition: 'sidechains are a type of scaling solution for Ethereum. They use their own consensus algorithm and run independently from the main chain, connecting via a two-way bridge. xDAI and Skale are two examples of sidechains.' },
+            { term: 'Slippage', definition: 'slippage refers to the expected price of a trade relative to the actual price when the trade is executed. Slippage often occurs during period of high volatility, or when liquidity is low. Automated market makers often allow users to set the rate of slippage to avoid paying more than anticipated for transactions.' },
+            { term: 'Smart Contracts', definition: 'the use of smart contracts is one of the fundamental characteristics of the Ethereum blockchain. Smart contracts add programmability to a blockchain, allowing for uses beyond only exchanging and storing value. Smart contracts can be thought of as automated lines of code that carry out the terms of a contract. Smart contract transactions are immutable, and the contracts themselves can not be changed once deployed. Smart contracts were first proposed by American computer scientist and early Bitcoin proponent Nick Szabo, but today they’re most frequently associated with Ethereum. Smart contracts in Ethereum are written in its own programming language, Solidity.' },
+            { term: 'Stablecoins', definition: 'stablecoins are a form of synthetic asset that track the price of another asset, such as the US dollar. They can act as a useful hedge against the volatility of crypto assets, and are often used for payments and yield farming. Most stablecoins are backed by fiat currencies or cryptocurrencies, but their price can also be maintained using commodities or algorithms instead of collateral. Fiat-backed stablecoins such as USDC require a custodian, while crypto-backed stablecoins like DAI must be overcollateralised because of the volatility of the underlying assets. Stablecoins have grown in the last few years: they account for over $30 billion of value on Ethereum today.' },
+            { term: 'Synthetic assets', definition: 'synthetic assets are assets that replicate another type of asset. In DeFi, they started out in the form of stablecoins, but have expanded to encompass crypto assets, precious metals like gold, and even traditional stocks. They could potentially replicate the entire TradFi system in the future.' },
+            { term: 'Throughput', definition: 'throughput refers to the amount of activity a blockchain can process in a given time period. Blockchains are often referred to in terms of transaction throughput, meaning the speed at which transactions are added to the chain.' },
+            { term: 'Token burn', definition: 'a token burn involves sending a token to an unusable address, effectively removing the tokens from the circulating supply. Projects sometimes use token burning as a strategy for their tokens, as reducing the supply can also impact the price.' },
+            { term: 'Tokenomics', definition: 'tokenomics refers to the economic policy of a token, such as the distribution, utility, and governance measures. Every project uses different tokenomics for their respective tokens, and the policies can determine the success or failure of a project.' },
+            { term: 'Treasury', definition: 'many DeFi projects manage a treasury, which holds a supply of tokens for future usage. Treasuries represent the project’s assets, and as DeFi is also “open finance”, holdings are often public, meaning anyone can find out how much a project holds.' },
+            { term: 'Trustless', definition: 'Trustlessness refers to the elimination of trust. In crypto, it’s often used to refer to the process of making a transaction without having to trust a third party, such as a bank. Trustlessness is therefore one of the core principles of DeFi.' },
+            { term: 'TVL', definition: 'TVL stands for Total Value Locked. The TVL is considered one of the key metrics for determining the strength of a project, as it shows how much the protocol is being used. DeFi blue chips like Compound and Aave contain billions of dollars in locked value. The whole of DeFi has a TVL of around $40 billion today.' },
+            { term: 'Ultrasound money', definition: '“Ultrasound money” is a meme coined by Ethereum developer Justin Drake. It refers to ETH, which is due to see a reduction in supply after the launch of EIP-1559. Where BTC is “sound money” capped at 21 million, ETH has been dubbed “ultrasound money” because it will see deflationary pressure due to EIP-1559’s fee burn mechanism. While neither BTC nor ETH equate to actual “money” with state guarantees, they are both seen as store of value assets in the cryptocurrency space.' },
+            { term: 'Validator', definition: 'in Ethereum, validators are participants who will help secure the network when it migrates to a proof-of-stake system. They secure the network and create new blocks in the chain. ETH holders can become validators by staking a minimum of 32 ETH.' },
+            { term: 'Web3', definition: 'Web3 refers to a new, decentralised version of the Internet. Web3 is aiming to create a new, open version of the web where no centralised party holds the power, and it has huge promise. It’s a world where participants will benefit from self-sovereignty, applications will be used to exchange value around the world, and a new tokenised economy is being built today. It will run on top of blockchains like Ethereum.' },
+            { term: 'Yield', definition: 'yield is another term for interest. In DeFi, yield is one of the core components of the ecosystem. By using protocols and joining liquidity pools, DeFi users can capture yield that surpasses rates paid by any regular bank today.' },
+            { term: 'Yield farming', definition: 'yield farming works similarly to liquidity mining; it’s a process of providing assets to a protocol and receiving additional tokens as a reward. It was pioneered by protocols like Compound and Yearn Finance, and exploded in popularity in 2020.' },
+            { term: 'Yield optimiser', definition: 'yield optimisers use smart contracts to find the most attractive yield for a user across different protocols. Because yield rates change so frequently, it can be very difficult to keep track of the best place to deposit assets. There’s also a cost of gas moving between pools. Yield optimisers like Yearn Finance aim to solve this problem by providing any easy-to-use interface to deposit assets and capture the best rates across pools.' },
+            { term: 'Zero-knowledge proofs', definition: 'zero-knowledge proofs are a form of cryptographic proof that one party can use to show they have “knowledge” of a value, without sharing the value itself. The Layer 2 solutions ZK rollups and Validium use zero-knowledge proofs.' },
+            { term: 'ZK rollups', definition: 'ZK rollups are a type of Layer 2 solution that work by grouping transfers into one transaction. Like optimistic rollups, they use SNARKS to submit one cryptographic proof to the Ethereum base layer. They allow for fast transactions. Examples of ZK rollup solutions include Loopring and StarkWare.' }
+        ];
+
+        // Sort glossaryData alphabetically by term
+        glossaryData.sort((a, b) => a.term.localeCompare(b.term));
+
+        // Render Glossary as 3-column table with terms and definitions
+        function renderGlossary(terms) {
+            const list = document.getElementById('glossary-list');
+            list.innerHTML = '';
+            if (terms.length === 0) {
+                list.innerHTML = '<p>No terms found.</p>';
+                return;
+            }
+            const table = document.createElement('table');
+            let row;
+            terms.forEach((item, index) => {
+                if (index % 3 === 0) {
+                    row = table.insertRow();
+                }
+                const cell = row.insertCell();
+                cell.innerHTML = `<span>${item.term}</span><p>${item.definition}</p>`;
+            });
+            list.appendChild(table);
+        }
+
+        renderGlossary(glossaryData);
+
+        // Create alphabet filter buttons
+        const alphabetFilter = document.getElementById('alphabet-filter');
+        const letters = ['0-9', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
+        letters.forEach(letter => {
+            const button = document.createElement('button');
+            button.textContent = letter;
+            button.addEventListener('click', () => {
+                let filtered;
+                if (letter === '0-9') {
+                    filtered = glossaryData.filter(item => /[0-9]/.test(item.term[0]));
+                } else {
+                    filtered = glossaryData.filter(item => item.term[0].toUpperCase() === letter);
+                }
+                renderGlossary(filtered);
+                searchInput.value = ''; // Clear search input on letter filter
+            });
+            alphabetFilter.appendChild(button);
+        });
+
+        // Autocomplete Search
+        const searchInput = document.getElementById('search-input');
+        const autocompleteList = document.getElementById('autocomplete-list');
+        const searchButton = document.getElementById('search-button');
+
+        searchInput.addEventListener('input', () => {
+            const value = searchInput.value.toLowerCase();
+            autocompleteList.innerHTML = '';
+            if (!value) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+
+            const filtered = glossaryData.filter(item => item.term.toLowerCase().includes(value));
+            filtered.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('autocomplete-item');
+                div.textContent = item.term;
+                div.addEventListener('click', () => {
+                    searchInput.value = item.term;
+                    autocompleteList.style.display = 'none';
+                    // Do not filter here, wait for search button
+                });
+                autocompleteList.appendChild(div);
+            });
+
+            autocompleteList.style.display = filtered.length ? 'block' : 'none';
+        });
+
+        // Search on button click
+        searchButton.addEventListener('click', () => {
+            const value = searchInput.value.toLowerCase();
+            let filtered = glossaryData;
+            if (value) {
+                filtered = glossaryData.filter(item => item.term.toLowerCase().includes(value));
+            }
+            renderGlossary(filtered);
+            autocompleteList.style.display = 'none';
+        });
+
+        // Also search on enter key
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+
+        // Click outside to close autocomplete
+        document.addEventListener('click', (e) => {
+            if (e.target !== searchInput) {
+                autocompleteList.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
