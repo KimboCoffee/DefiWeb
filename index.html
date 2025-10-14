@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DefiWeb3 - Futuristic Blockchain Homepage</title>
+    <title>DeFiWeb3.io - Web3, DeFi & Blockchain Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -20,11 +21,7 @@
             position: relative;
             overflow-x: hidden;
             transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.light-mode {
-            background-color: #f0f0f5;
-            color: #1a1a3d;
+            scroll-behavior: smooth;
         }
 
         /* Blockchain Background Animation */
@@ -36,14 +33,7 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-        }
-
-        body.dark-mode .background {
             background: linear-gradient(135deg, #0a0a1a, #1a1a3d);
-        }
-
-        body.light-mode .background {
-            background: linear-gradient(135deg, #e0e0f5, #f0f0f5);
         }
 
         .background::before {
@@ -67,20 +57,12 @@
             opacity: 0.2;
         }
 
-        body.light-mode .background::after {
-            opacity: 0.1;
-        }
-
         .background .particle {
             position: absolute;
             background: #00D1B2;
             border-radius: 50%;
             opacity: 0.6;
             animation: float 15s infinite linear;
-        }
-
-        body.light-mode .particle {
-            background: #007a66;
         }
 
         .particle:nth-child(1) { width: 8px; height: 8px; top: 20%; left: 10%; animation-duration: 20s; }
@@ -99,158 +81,85 @@
             100% { transform: translate(100vw, -100vh); }
         }
 
-        /* Header */
+        /* Header and Navigation */
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
-            padding: 20px;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
-        body.light-mode header {
-            background: linear-gradient(90deg, #e0e0f5, #d0d0ea);
+        header.scrolled {
+            background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
+            opacity: 0.95;
         }
 
-        header h1 {
-            font-size: 24px;
+        .logo {
+            font-size: 1.5rem;
             color: #00D1B2;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        body.light-mode header h1 {
-            color: #007a66;
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
         }
 
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #00D1B2;
+        }
+
+        /* Hamburger Menu */
         .hamburger {
             display: none;
-            font-size: 30px;
+            flex-direction: column;
             cursor: pointer;
-            color: #e0e0e0;
         }
 
-        body.light-mode .hamburger {
-            color: #1a1a3d;
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #e0e0e0;
+            margin: 4px 0;
+            transition: 0.3s;
         }
 
-        nav {
-            display: flex;
-            align-items: center;
-        }
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            nav ul {
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                display: none;
+            }
 
-        nav a {
-            color: #e0e0e0;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
+            nav ul.active {
+                display: flex;
+            }
 
-        body.light-mode nav a {
-            color: #1a1a3d;
-        }
-
-        nav a:hover {
-            color: #00D1B2;
-        }
-
-        body.light-mode nav a:hover {
-            color: #007a66;
-        }
-
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-        .dropdown > a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        body.light-mode .dropdown > a {
-            color: #1a1a3d;
-        }
-
-        .dropdown > a:hover {
-            color: #00D1B2;
-        }
-
-        body.light-mode .dropdown > a:hover {
-            color: #007a66;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #1a1a3d;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        body.light-mode .dropdown-content {
-            background-color: #e0e0f5;
-        }
-
-        .dropdown-content a {
-            color: #e0e0e0;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s;
-        }
-
-        body.light-mode .dropdown-content a {
-            color: #1a1a3d;
-        }
-
-        .dropdown-content a:hover {
-            background-color: rgba(0, 209, 178, 0.1);
-        }
-
-        body.light-mode .dropdown-content a:hover {
-            background-color: rgba(0, 122, 102, 0.1);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Mode Toggle Button */
-        .mode-toggle {
-            background: none;
-            border: 2px solid #00D1B2;
-            color: #00D1B2;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-            margin-left: 15px;
-        }
-
-        body.light-mode .mode-toggle {
-            border-color: #007a66;
-            color: #007a66;
-        }
-
-        .mode-toggle:hover {
-            background-color: #00D1B2;
-            color: #0a0a1a;
-        }
-
-        body.light-mode .mode-toggle:hover {
-            background-color: #007a66;
-            color: #f0f0f5;
+            .hamburger {
+                display: flex;
+            }
         }
 
         /* Hero Section */
@@ -261,280 +170,129 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
-            padding-top: 80px; /* Account for fixed header */
+            padding: 2rem;
+            padding-top: 80px;
+            animation: fadeIn 2s ease-out;
         }
 
-        .hero h2 {
-            font-size: 48px;
+        .hero h1 {
+            font-size: 3rem;
             color: #00D1B2;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        body.light-mode .hero h2 {
-            color: #007a66;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00D1B2;
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: 1.2rem;
             max-width: 600px;
-            margin-bottom: 30px;
         }
 
-        body.light-mode .hero p {
-            color: #1a1a3d;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero .wallet-button {
-            background: transparent;
-            border: 2px solid #00D1B2;
-            color: #00D1B2;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 10px;
+        /* Glossary Section */
+        .glossary {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
         }
 
-        body.light-mode .hero .wallet-button {
-            border-color: #007a66;
-            color: #007a66;
-        }
-
-        .hero .wallet-button:hover {
-            background-color: #00D1B2;
-            color: #0a0a1a;
-        }
-
-        body.light-mode .hero .wallet-button:hover {
-            background-color: #007a66;
-            color: #f0f0f5;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 50px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .feature-card {
-            background-color: #1a1a3d;
-            border: 1px solid #00D1B2;
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
+        .glossary h2 {
             text-align: center;
-            transition: transform 0.3s;
-        }
-
-        body.light-mode .feature-card {
-            background-color: #e0e0f5;
-            border-color: #007a66;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature-card h3 {
+            font-size: 2.5rem;
             color: #00D1B2;
-            margin-bottom: 10px;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
-        body.light-mode .feature-card h3 {
-            color: #007a66;
+        /* Search Bar with Autocomplete */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
         }
 
-        .feature-card p {
-            font-size: 16px;
-        }
-
-        body.light-mode .feature-card p {
-            color: #1a1a3d;
-        }
-
-        /* Crypto Prices Section */
-        .crypto-prices {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .crypto-prices h2 {
-            color: #00D1B2;
-            margin-bottom: 30px;
-            font-size: 32px;
-        }
-
-        body.light-mode .crypto-prices h2 {
-            color: #007a66;
-        }
-
-        .crypto-table {
+        #search-input {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: #1a1a3d;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        body.light-mode .crypto-table {
-            background-color: #e0e0f5;
-        }
-
-        .crypto-table th,
-        .crypto-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #00D1B2;
-        }
-
-        body.light-mode .crypto-table th,
-        body.light-mode .crypto-table td {
-            border-bottom-color: #007a66;
-        }
-
-        .crypto-table th {
-            background-color: #00D1B2;
-            color: #0a0a1a;
-            font-weight: bold;
-        }
-
-        body.light-mode .crypto-table th {
-            background-color: #007a66;
-            color: #f0f0f5;
-        }
-
-        .crypto-table tr:hover {
-            background-color: rgba(0, 209, 178, 0.1);
-        }
-
-        body.light-mode .crypto-table tr:hover {
-            background-color: rgba(0, 122, 102, 0.1);
-        }
-
-        .price-up {
-            color: #00ff88;
-        }
-
-        .price-down {
-            color: #ff4444;
-        }
-
-        .price-neutral {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00D1B2;
             color: #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
-        body.light-mode .price-up {
-            color: #00cc70;
+        #autocomplete-list {
+            position: absolute;
+            width: 100%;
+            background: #1a1a3d;
+            border: 1px solid #00D1B2;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
         }
 
-        body.light-mode .price-down {
-            color: #cc0000;
+        .autocomplete-item {
+            padding: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
-        body.light-mode .price-neutral {
-            color: #1a1a3d;
+        .autocomplete-item:hover {
+            background: rgba(0, 209, 178, 0.2);
         }
 
-        .loading {
-            text-align: center;
-            padding: 20px;
-            font-style: italic;
+        /* Glossary List */
+        #glossary-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .term {
+            background: #1a1a3d;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #00D1B2;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .term:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px #00D1B2;
+        }
+
+        .term h3 {
+            color: #00D1B2;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Smooth Scroll Effects */
+        section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Footer */
         footer {
-            background-color: #1a1a3d;
-            padding: 20px;
             text-align: center;
-            font-size: 14px;
-        }
-
-        body.light-mode footer {
-            background-color: #e0e0f5;
-        }
-
-        footer a {
-            color: #00D1B2;
-            text-decoration: none;
-        }
-
-        body.light-mode footer a {
-            color: #007a66;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                padding: 20px;
-                justify-content: space-between;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
-                padding: 20px;
-            }
-
-            body.light-mode nav {
-                background: linear-gradient(90deg, #e0e0f5, #d0d0ea);
-            }
-
-            nav.active {
-                display: flex;
-            }
-
-            nav a, .dropdown {
-                margin: 10px 0;
-                text-align: center;
-            }
-
-            .mode-toggle {
-                margin: 10px 0;
-                margin-left: 0;
-            }
-
-            .hero h2 {
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .crypto-table {
-                font-size: 14px;
-            }
-
-            .crypto-table th,
-            .crypto-table td {
-                padding: 10px;
-            }
+            padding: 2rem;
+            background: #1a1a3d;
+            color: #888;
         }
     </style>
 </head>
-<body class="dark-mode">
+<body>
     <div class="background">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -543,144 +301,61 @@
     </div>
 
     <header>
-        <h1>DefiWeb3</h1>
-        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-        <nav id="nav-menu">
-            <a href="#home">Home</a>
-            <div class="dropdown">
-                <a href="#features">DeFi</a>
-                <div class="dropdown-content">
-                    <a href="#">DEX</a>
-                    <a href="#">Lend</a>
-                    <a href="#">Borrow</a>
-                    <a href="#">RWA</a>
-                </div>
-            </div>
-            <a href="#prices">Crypto Prices</a>
-            <div class="dropdown">
-                <a href="#">Top Cryptos</a>
-                <div class="dropdown-content">
-                    <a href="https://bitcoin.org/">Bitcoin</a>
-                    <a href="https://solana.com/">Solana</a>
-                    <a href="https://ethereum.org/">Ethereum</a>
-                    <a href="https://polygon.technology/">Polygon</a>
-                </div>
-            </div>
-            <a href="#contact">Contact</a>
-            <button class="mode-toggle" onclick="toggleMode()">Light Mode</button>
+        <div class="logo">DeFiWeb3.io</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="defi-web3-crypto-glossary.html">Glossary</a></li>
+            </ul>
         </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
 
-    <section class="hero" id="home">
-        <h2>Welcome to DefiWeb3</h2>
-        <p>Discover the ultimate hub for your DeFi or Web3 initiatives, where innovation meets blockchain excellence. Seamlessly develop, deploy, and scale decentralized applications, financial protocols, and digital ecosystems on top-tier networks like Ethereum for robust smart contracts, Solana for lightning-fast transactions, Polygon for cost-effective scaling, and many more. Unlock tools for lending, trading, staking, and tokenized assets in a secure, interconnected environment designed to empower creators and users alike.</p>
-        <button class="wallet-button">Connect Wallet</button>
-    </section>
+    <main>
+        <section id="hero" class="hero">
+            <h1>Welcome to the DeFi & Web3 Hub</h1>
+            <p>Explore the future of decentralized finance, blockchain ecosystems, and enhance your knowledge.</p>
+        </section>
+    </main>
 
-    <section class="features" id="features">
-        <div class="feature-card">
-            <h3>DeFi on Ethereum</h3>
-            <p>Launch a decentralized finance platform for lending, staking, or yield farming with DefiWeb3's iconic branding.</p>
-        </div>
-        <div class="feature-card">
-            <h3>NFTs on Solana</h3>
-            <p>Create a high-speed NFT marketplace for digital collectibles, powered by Solana's scalability.</p>
-        </div>
-        <div class="feature-card">
-            <h3>DAOs on Polygon</h3>
-            <p>Create a decentralized autonomous organization with low-cost transactions on Polygon's layer-2 solution.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Web3 Solutions</h3>
-            <p>Use DefiWeb3 for your blockchain app, wallet, or protocol across any chain to lead the Web3 revolution.</p>
-        </div>
-    </section>
-
-    <section class="crypto-prices" id="prices">
-        <h2>Top 10 Cryptos - Live Prices</h2>
-        <div id="crypto-content">
-            <div class="loading">Loading live prices...</div>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <p>This page is for illustration purposes!</p>
+    <footer>
+        &copy; 2025 DeFiWeb3.io - All Rights Reserved
     </footer>
 
     <script>
-        function toggleMode() {
-            const body = document.body;
-            const button = document.querySelector('.mode-toggle');
-            body.classList.toggle('light-mode');
-            body.classList.toggle('dark-mode');
-            button.textContent = body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode';
-        }
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navUl = document.querySelector('nav ul');
 
-        function toggleMenu() {
-            const nav = document.getElementById('nav-menu');
-            nav.classList.toggle('active');
-        }
+        hamburger.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
 
-        // Live Crypto Prices
-        async function fetchCryptoPrices() {
-            const content = document.getElementById('crypto-content');
-            content.innerHTML = '<div class="loading">Loading live prices...</div>';
-
-            try {
-                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false');
-                const data = await response.json();
-                let tableHTML = `
-                    <table class="crypto-table">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Name (Symbol)</th>
-                                <th>Price (USD)</th>
-                                <th>24h Change</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
-
-                data.forEach((crypto, index) => {
-                    const rank = index + 1;
-                    const name = crypto.name + ' (' + crypto.symbol.toUpperCase() + ')';
-                    const price = '$' + crypto.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    const change = crypto.price_change_percentage_24h;
-                    let changeClass = 'price-neutral';
-                    let changeIcon = '•';
-                    if (change > 0) {
-                        changeClass = 'price-up';
-                        changeIcon = '🟢 ↑';
-                    } else if (change < 0) {
-                        changeClass = 'price-down';
-                        changeIcon = '🔴 ↓';
-                    }
-                    const changeText = changeIcon + ' ' + change.toFixed(2) + '%';
-                    tableHTML += `
-                        <tr>
-                            <td>${rank}</td>
-                            <td>${name}</td>
-                            <td>${price}</td>
-                            <td class="${changeClass}">${changeText}</td>
-                        </tr>
-                    `;
-                });
-
-                tableHTML += `
-                        </tbody>
-                    </table>
-                    <p style="margin-top: 20px; font-size: 12px; opacity: 0.7;">Data from CoinGecko API. Updates every 60s. Last updated: ${new Date().toLocaleTimeString()}.</p>
-                `;
-                content.innerHTML = tableHTML;
-            } catch (error) {
-                content.innerHTML = '<div class="loading">Error fetching prices. Please refresh the page.</div>';
+        // Scrolled Header
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                document.querySelector('header').classList.add('scrolled');
+            } else {
+                document.querySelector('header').classList.remove('scrolled');
             }
-        }
+        });
 
-        // Load on page load and refresh every 60 seconds
-        fetchCryptoPrices();
-        setInterval(fetchCryptoPrices, 60000);
+        // Smooth Scroll Effects with Intersection Observer
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
