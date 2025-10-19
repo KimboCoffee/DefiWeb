@@ -3,360 +3,697 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeFiWeb3.io - Crypto, Web3 & DeFi Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <title>DeFiWeb3.io - Your Central Hub for DeFi, Web3, and Crypto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Reset and Base Styles */
+        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Exo 2', sans-serif;
         }
-
         body {
-            background-color: #0a0a1a;
-            color: #e0e0e0;
+            font-family: 'Titillium Web', sans-serif;
             line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s;
-            scroll-behavior: smooth;
+            color: #d4d4d4;
+            background-color: #0f172a;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Blockchain Background Animation */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0a0a1a, #1a1a3d);
-        }
-
-        .background::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 209, 178, 0.3) 0%, transparent 70%);
-            animation: pulse 10s infinite;
-        }
-
-        .background::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9Ijg2LjYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUwIDBMIDAgNDMuM0wgMCA4Ni42TCA1MCA4Ni42TCAxMDAgNDMuM0wgMTAwIDB6IiBzdHJva2U9IiMwMEQxQjIiIGZpbGw9Im5vbmUiLz48bGluZSB4MT0iNTAiIHkxPSIwIiB4Mj0iMCIgeTI9IjQzLjMiIHN0cm9rZT0iIzAwRDFCMiIvPjpsaW5lIHgxPSI1MCIgeTE9IjAiIHgyPSIxMDAiIHkyPSI0My4zIiBzdHJva2U9IiMwMEQxQjIiLz48bGluZSB4MT0iMCIgeTE9IjQzLjMiIHgyPSI1MCIgeTI9Ijg2LjYiIHN0cm9rZT0iIzAwRDFCMiIvPjpsaW5lIHgxPSIxMDAiIHkxPSI0My4zIiB4Mj0iNTAiIHkyPSI4Ni42IiBzdHJva2U9IiMwMEQxQjIiLz48bGluZSB4MT0iMCIgeTE9IjQzLjMiIHgyPSIxMDAiIHkyPSI0My4zIiBzdHJva2U9IiMwMEQxQjIiLz48L3N2Zz4=');
-            background-repeat: repeat;
-            opacity: 0.2;
-        }
-
-        .background .particle {
-            position: absolute;
-            background: #00D1B2;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: float 15s infinite linear;
-        }
-
-        .particle:nth-child(1) { width: 8px; height: 8px; top: 20%; left: 10%; animation-duration: 20s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; top: 50%; left: 30%; animation-duration: 25s; }
-        .particle:nth-child(3) { width: 7px; height: 7px; top: 70%; left: 60%; animation-duration: 18s; }
-        .particle:nth-child(4) { width: 9px; height: 9px; top: 30%; left: 80%; animation-duration: 22s; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.2); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 0.3; }
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100vw, -100vh); }
-        }
-
-        /* Header and Navigation */
+        /* Header */
         header {
-            position: fixed;
+            background-color: #1e293b;
+            color: #fff;
+            padding: 15px 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
-            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            transition: all 0.3s ease;
         }
-
-        header.scrolled {
-            background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
-            opacity: 0.95;
-        }
-
         .logo {
-            font-size: 1.5rem;
-            color: #00D1B2;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
-
         nav ul {
-            list-style: none;
             display: flex;
-            gap: 2rem;
+            list-style: none;
         }
-
+        nav ul li {
+            margin-left: 25px;
+        }
         nav ul li a {
-            color: #e0e0e0;
+            color: #fff;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
-
         nav ul li a:hover {
-            color: #00D1B2;
+            color: #3b82f6;
+            transform: scale(1.1);
         }
-
-        /* Hamburger Menu */
-        .hamburger {
+        .menu-toggle {
             display: none;
-            flex-direction: column;
             cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #e0e0e0;
-            margin: 4px 0;
-            transition: 0.3s;
-        }
-
-        /* Mobile Menu */
-        @media (max-width: 768px) {
-            nav ul {
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: linear-gradient(90deg, #1a1a3d, #2a2a5e);
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-                display: none;
-            }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            .hamburger {
-                display: flex;
-            }
+            font-size: 28px;
+            color: #fff;
         }
 
         /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        #hero {
+            background: linear-gradient(135deg, #3b82f6, #14b8a6, #1d4ed8);
+            color: #fff;
             text-align: center;
-            padding: 2rem;
-            padding-top: 80px;
-            animation: fadeIn 2s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: #00D1B2;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px #00D1B2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Glossary Section */
-        .glossary {
-            padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.5s ease;
-        }
-
-        .glossary h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #00D1B2;
-            margin-bottom: 2rem;
-            animation: fadeIn 1s ease-out 0.5s both;
-        }
-
-        /* Search Bar with Autocomplete */
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 2rem;
+            padding: 150px 20px;
             position: relative;
+            overflow: hidden;
         }
-
-        #search-input {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #00D1B2;
-            color: #e0e0e0;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        #autocomplete-list {
+        #hero::before {
+            content: '';
             position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: #1a1a3d;
-            border: 1px solid #00D1B2;
-            border-top: none;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1920x1080/?blockchain,futuristic') no-repeat center/cover;
+            opacity: 0.3;
+            z-index: -1;
         }
-
-        .autocomplete-item {
-            padding: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
+        #hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
         }
-
-        .autocomplete-item:hover {
-            background: rgba(0, 209, 178, 0.2);
+        #hero p {
+            font-size: 28px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: both;
         }
-
-        /* Glossary List */
-        #glossary-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .btn {
+            background: linear-gradient(45deg, #3b82f6, #14b8a6);
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            animation: fadeIn 1.5s ease-out;
+            display: inline-block;
         }
-
-        .term {
-            background: #1a1a3d;
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid #00D1B2;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .term:hover {
+        .btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 15px #00D1B2;
+            box-shadow: 0 10px 20px rgba(59,130,246,0.3);
+            background: linear-gradient(45deg, #1d4ed8, #0f766e);
         }
 
-        .term h3 {
-            color: #00D1B2;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Smooth Scroll Effects */
+        /* Sections */
         section {
+            padding: 80px 0;
+            animation: fadeIn 1s ease-out;
             opacity: 0;
             transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
+            transition: opacity 1s ease-out, transform 1s ease-out;
         }
-
         section.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 42px;
+            color: #3b82f6;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(59,130,246,0.2);
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            object-fit: contain;
+            padding: 10px;
+        }
+        .card h3 {
+            margin-bottom: 15px;
+        }
+        .card p {
+            margin-bottom: 20px;
+        }
+
+        /* Dark theme defaults */
+        section {
+            background-color: #0f172a;
+        }
+        .card {
+            background: #1e293b;
+        }
+        .card img {
+            background: #0f172a;
+        }
+        .card h3 {
+            color: #fff;
+        }
+        .card p {
+            color: #a3a3a3;
+        }
+        .card a {
+            color: #3b82f6;
+        }
+        .card a:hover {
+            color: #14b8a6;
+        }
+
+        /* Light theme */
+        section.light {
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        section.light h2 {
+            color: #3b82f6;
+        }
+        section.light .card {
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        section.light .card:hover {
+            box-shadow: 0 15px 30px rgba(59,130,246,0.1);
+        }
+        section.light .card img {
+            background: #f0f4f8;
+        }
+        section.light .card h3 {
+            color: #333;
+        }
+        section.light .card p {
+            color: #666;
+        }
+        section.light .card a {
+            color: #3b82f6;
+        }
+        section.light .card a:hover {
+            color: #14b8a6;
+        }
+
+        /* Featured Solana Section */
+        #solana {
+            background: linear-gradient(to right, #3b82f6, #14b8a6);
+            color: #fff;
+        }
+        #solana .card {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Chart */
+        #adoptionChart {
+            max-width: 800px;
+            margin: 40px auto 0;
+            height: 800px !important;
+        }
+
+        /* News Feed */
+        #news-feed {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .news-item-dynamic {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .news-item-dynamic h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .news-item-dynamic p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .news-item-dynamic a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .news-item-dynamic a:hover {
+            color: #14b8a6;
+        }
 
         /* Footer */
         footer {
+            background-color: #1e293b;
+            color: #fff;
             text-align: center;
-            padding: 2rem;
-            background: #1a1a3d;
-            color: #888;
+            padding: 30px 0;
+            border-top: 1px solid #333;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 20px;
+            }
+            nav ul li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 20px;
+            }
+            nav.active ul {
+                display: flex;
+            }
+            #hero h1 {
+                font-size: 40px;
+            }
+            #hero p {
+                font-size: 20px;
+            }
+            section h2 {
+                font-size: 32px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            #news-feed {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
     <header>
-        <div class="logo">DeFiWeb3.io</div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="crypto-defi-web3-glossary.html">Glossary</a></li>
-                <li><a href="crypto-defi-web3-news.html">News</a></li>
-            </ul>
-        </nav>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="container">
+            <div class="logo">DeFiWeb3.io</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#ecosystems">Ecosystems</a></li>
+                    <li><a href="#metrics">Metrics</a></li>
+                    <li><a href="#defi">DeFi</a></li>
+                    <li><a href="#web3">Web3</a></li>
+                    <li><a href="#crypto">Crypto</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">&#9776;</div>
         </div>
     </header>
 
-    <main>
-        <section id="hero" class="hero">
-            <h1>Crypto, Web3 & DeFi Hub</h1>
-            <p>Explore the future of decentralized finance, crypto ecosystems and enhance your knowledge.</p>
-        </section>
-    </main>
+    <section id="hero">
+        <div class="container">
+            <h1>Welcome to DeFiWeb3.io</h1>
+            <p>Your Ultimate Hub for DeFi, Web3, and Crypto Innovations</p>
+            <a href="#ecosystems" class="btn">Dive into Ecosystems</a>
+        </div>
+    </section>
+
+    <section id="ecosystems">
+        <div class="container">
+            <h2>Explore Ecosystems</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png" alt="Solana Logo">
+                    <h3>Solana</h3>
+                    <p>High-performance blockchain for fast, low-cost transactions. Heavy focus on DeFi and NFTs.</p>
+                    <a href="https://solana.com/" target="_blank" class="btn">Visit Solana</a>
+                </div>
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/2048px-Bitcoin.svg.png" alt="Bitcoin Logo">
+                    <h3>Bitcoin</h3>
+                    <p>The original cryptocurrency, store of value.</p>
+                    <a href="https://bitcoin.org/" target="_blank" class="btn">Visit Bitcoin</a>
+                </div>
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/512px-Ethereum-icon-purple.svg.png" alt="Ethereum Logo">
+                    <h3>Ethereum</h3>
+                    <p>Smart contract platform powering DeFi and dApps.</p>
+                    <a href="https://ethereum.org/" target="_blank" class="btn">Visit Ethereum</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="metrics" class="light">
+        <div class="container">
+            <h2>Key Metrics</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Total Crypto Market Cap</h3>
+                    <p id="total-market-cap">$0T</p>
+                </div>
+                <div class="card">
+                    <h3>Bitcoin Price (USD)</h3>
+                    <p id="bitcoin-price">$0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Ethereum Price (USD)</h3>
+                    <p id="ethereum-price">$0.00</p>
+                </div>
+                <div class="card">
+                    <h3>Solana Price (USD)</h3>
+                    <p id="solana-price">$0.00</p>
+                </div>
+                <div class="card">
+                    <h3>BTC Dominance</h3>
+                    <p id="btc-dominance">0%</p>
+                </div>
+                <div class="card">
+                    <h3>Total 24h Volume</h3>
+                    <p id="total-volume">$0B</p>
+                </div>
+                <div class="card">
+                    <h3>DeFi TVL</h3>
+                    <p id="defi-tvl">$0B</p>
+                </div>
+                <div class="card">
+                    <h3>ETH Gas Price (Gwei)</h3>
+                    <p id="eth-gas-price">0</p>
+                </div>
+                <div class="card">
+                    <h3>Active Addresses (24h)</h3>
+                    <p id="active-addresses">0</p>
+                </div>
+            </div>
+            <canvas id="adoptionChart" width="800" height="800"></canvas>
+        </div>
+    </section>
+
+    <section id="defi">
+        <div class="container">
+            <h2>DeFi - Decentralized Finance</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>What is DeFi?</h3>
+                    <p>DeFi offers financial services on blockchain, decentralizing traditional banking.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="card">
+                    <h3>Popular DeFi Platforms</h3>
+                    <p>Explore Uniswap, Aave, Compound for lending, borrowing, trading.</p>
+                    <a href="#" class="btn">Get Started</a>
+                </div>
+                <div class="card">
+                    <h3>DeFi Tools</h3>
+                    <p>Track yields, manage portfolios, analyze risks.</p>
+                    <a href="#" class="btn">Discover Tools</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="web3" class="light">
+        <div class="container">
+            <h2>Web3 - The Decentralized Web</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Understanding Web3</h3>
+                    <p>Next-gen internet with blockchain for peer-to-peer interactions.</p>
+                    <a href="#" class="btn">Dive In</a>
+                </div>
+                <div class="card">
+                    <h3>Web3 Wallets</h3>
+                    <p>Secure assets with MetaMask or WalletConnect.</p>
+                    <a href="#" class="btn">Set Up Wallet</a>
+                </div>
+                <div class="card">
+                    <h3>dApps</h3>
+                    <p>Decentralized apps for gaming, social, more.</p>
+                    <a href="#" class="btn">Browse dApps</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="crypto">
+        <div class="container">
+            <h2>Crypto - Digital Currencies</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Top Cryptocurrencies</h3>
+                    <p>Bitcoin, Ethereum - track prices, trends.</p>
+                    <a href="#" class="btn">View Prices</a>
+                </div>
+                <div class="card">
+                    <h3>Trading Strategies</h3>
+                    <p>Day trading, HODLing, risk management.</p>
+                    <a href="#" class="btn">Strategies</a>
+                </div>
+                <div class="card">
+                    <h3>Security Tips</h3>
+                    <p>Protect from scams, hacks.</p>
+                    <a href="#" class="btn">Stay Safe</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="light">
+        <div class="container">
+            <h2>Latest News</h2>
+            <div id="news-feed"></div>
+        </div>
+    </section>
+
+    <section id="resources">
+        <div class="container">
+            <h2>Resources</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Tutorials</h3>
+                    <p>Guides for DeFi, Web3 beginners.</p>
+                    <a href="#" class="btn">Start Learning</a>
+                </div>
+                <div class="card">
+                    <h3>Community Forums</h3>
+                    <p>Join Reddit, Discord discussions.</p>
+                    <a href="#" class="btn">Join Now</a>
+                </div>
+                <div class="card">
+                    <h3>Tools & APIs</h3>
+                    <p>Crypto data APIs, explorers.</p>
+                    <a href="#" class="btn">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        &copy; 2025 DeFiWeb3.io - All Rights Reserved
+        <div class="container">
+            <p>&copy; 2025 DeFiWeb3.io. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
-        // Hamburger Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navUl = document.querySelector('nav ul');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
 
-        hamburger.addEventListener('click', () => {
-            navUl.classList.toggle('active');
-            hamburger.classList.toggle('active');
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
         });
 
-        // Scrolled Header
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                document.querySelector('header').classList.add('scrolled');
-            } else {
-                document.querySelector('header').classList.remove('scrolled');
-            }
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Optional: observe once
+                    }
+                });
+            }, { threshold: 0.1 });
 
-        // Smooth Scroll Effects with Intersection Observer
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            const metricsSection = document.getElementById('metrics');
+            const metricsObserver = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    fetchData();
+                    metricsObserver.unobserve(metricsSection);
                 }
             });
-        }, { threshold: 0.1 });
+            metricsObserver.observe(metricsSection);
 
-        sections.forEach(section => observer.observe(section));
+            const newsSection = document.getElementById('news');
+            const newsObserver = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    fetchNews();
+                    newsObserver.unobserve(newsSection);
+                }
+            });
+            newsObserver.observe(newsSection);
+        });
+
+        function fetchData() {
+            Promise.all([
+                fetch('https://api.coingecko.com/api/v3/global'),
+                fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd'),
+                fetch('https://api.llama.fi/chains'),
+                fetch('https://api.coingecko.com/api/v3/global/market_cap_chart?vs_currency=usd&days=365')
+            ]).then(responses => Promise.all(responses.map(r => r.json())))
+            .then(([globalData, priceData, llamaData, chartData]) => {
+                const marketCap = globalData.data.total_market_cap.usd / 1e12; // in trillions
+                animateNumber('total-market-cap', 0, marketCap, 2000, (value) => '$' + value.toFixed(2) + 'T');
+
+                const btcPrice = priceData.bitcoin.usd;
+                animateNumber('bitcoin-price', 0, btcPrice, 2000, (value) => '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+                const ethPrice = priceData.ethereum.usd;
+                animateNumber('ethereum-price', 0, ethPrice, 2000, (value) => '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+                const solPrice = priceData.solana.usd;
+                animateNumber('solana-price', 0, solPrice, 2000, (value) => '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+                const btcDominance = globalData.data.market_cap_percentage.btc;
+                animateNumber('btc-dominance', 0, btcDominance, 2000, (value) => value.toFixed(2) + '%');
+
+                const totalVolume = globalData.data.total_volume.usd / 1e9; // in billions
+                animateNumber('total-volume', 0, totalVolume, 2000, (value) => '$' + value.toFixed(2) + 'B');
+
+                let tvl = 0;
+                llamaData.forEach(chain => {
+                    tvl += chain.tvl || 0;
+                });
+                tvl /= 1e9; // in billions
+                animateNumber('defi-tvl', 0, tvl, 2000, (value) => '$' + value.toFixed(3) + 'B');
+
+                // Placeholder for ETH gas and active addresses
+                animateNumber('eth-gas-price', 0, 10, 2000, (value) => value.toFixed(0));
+                animateNumber('active-addresses', 0, 1000000, 2000, (value) => value.toLocaleString('en-US'));
+
+                // 2025 Crypto Adoption Graph - Bar chart inspired by Chainalysis
+                const countries = ['India', 'United States', 'Pakistan', 'Vietnam', 'Brazil', 'Nigeria', 'Indonesia', 'Ukraine', 'Philippines', 'Russian Federation', 'United Kingdom', 'Ethiopia', 'Bangladesh', 'Turkiye', 'Korea, Rep.', 'Yemen, Rep.', 'Thailand', 'Venezuela, RB', 'Japan', 'Argentina'];
+                const ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+                const scores = ranks.map(rank => 1 - (rank - 1) / 19); // Normalized score: 1 for rank 1, decreasing to 0 for rank 20
+
+                const ctx = document.getElementById('adoptionChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: countries,
+                        datasets: [{
+                            label: '2025 Global Crypto Adoption Index (Normalized Score)',
+                            data: scores,
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        indexAxis: 'y', // Horizontal bar chart
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Normalized Adoption Score'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Country'
+                                }
+                            }
+                        }
+                    }
+                });
+            }).catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+
+        function fetchNews() {
+            fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN')
+                .then(response => response.json())
+                .then(data => {
+                    const newsFeed = document.getElementById('news-feed');
+                    data.Data.slice(0, 10).forEach(article => {
+                        const newsItem = document.createElement('div');
+                        newsItem.classList.add('news-item-dynamic');
+                        newsItem.innerHTML = `
+                            <h3>${article.title}</h3>
+                            <a href="${article.url}" target="_blank" class="btn">Read More</a>
+                        `;
+                        newsFeed.appendChild(newsItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching news:', error);
+                    document.getElementById('news-feed').innerHTML = '<p>Failed to load news.</p>';
+                });
+        }
+
+        function animateNumber(id, start, end, duration, formatCallback) {
+            const element = document.getElementById(id);
+            let startTime = null;
+
+            function animate(time) {
+                if (!startTime) startTime = time;
+                const progress = Math.min((time - startTime) / duration, 1);
+                const value = start + progress * (end - start);
+                element.textContent = formatCallback(value);
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
     </script>
 </body>
 </html>
