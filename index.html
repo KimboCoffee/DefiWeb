@@ -41,9 +41,16 @@
             align-items: center;
         }
         .logo {
+            display: flex;
+            align-items: center;
             font-size: 28px;
             font-weight: bold;
             letter-spacing: 1px;
+        }
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
         }
         nav ul {
             display: flex;
@@ -329,12 +336,63 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* New styles for Key Metrics */
+        #metrics .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        #metrics .metric-card {
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-align: center;
+            background: #ffffff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #metrics .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59,130,246,0.15);
+        }
+        #metrics .metric-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        #metrics .metric-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #14b8a6; /* Different color: teal */
+        }
+
+        /* Ensure button text is white */
+        .btn,
+        .news-item-dynamic a {
+            color: #fff !important;
+        }
+        .news-item-dynamic a {
+            background: linear-gradient(45deg, #3b82f6, #14b8a6);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .news-item-dynamic a:hover {
+            background: linear-gradient(45deg, #1d4ed8, #0f766e);
+            color: #fff !important;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="logo">DeFiWeb3.io</div>
+            <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="50" fill="linear-gradient(45deg, #3b82f6, #14b8a6)" />
+                    <text x="50" y="55" font-size="30" text-anchor="middle" fill="#fff" font-weight="bold">DW3</text>
+                </svg>
+                DeFiWeb3.io
+            </div>
             <nav>
                 <ul>
                     <li><a href="#hero">Home</a></li>
@@ -388,42 +446,42 @@
     <section id="metrics" class="light">
         <div class="container">
             <h2>Key Metrics</h2>
-            <div class="grid">
-                <div class="card">
+            <div class="metric-grid">
+                <div class="metric-card">
                     <h3>Total Crypto Market Cap</h3>
-                    <p id="total-market-cap">$0T</p>
+                    <p id="total-market-cap" class="metric-value">$0T</p>
                 </div>
-                <div class="card">
-                    <h3>Bitcoin Price (USD)</h3>
-                    <p id="bitcoin-price">$0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Ethereum Price (USD)</h3>
-                    <p id="ethereum-price">$0.00</p>
-                </div>
-                <div class="card">
-                    <h3>Solana Price (USD)</h3>
-                    <p id="solana-price">$0.00</p>
-                </div>
-                <div class="card">
+                <div class="metric-card">
                     <h3>BTC Dominance</h3>
-                    <p id="btc-dominance">0%</p>
+                    <p id="btc-dominance" class="metric-value">0%</p>
                 </div>
-                <div class="card">
+                <div class="metric-card">
                     <h3>Total 24h Volume</h3>
-                    <p id="total-volume">$0B</p>
+                    <p id="total-volume" class="metric-value">$0B</p>
                 </div>
-                <div class="card">
+                <div class="metric-card">
+                    <h3>Bitcoin Price (USD)</h3>
+                    <p id="bitcoin-price" class="metric-value">$0.00</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Ethereum Price (USD)</h3>
+                    <p id="ethereum-price" class="metric-value">$0.00</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Solana Price (USD)</h3>
+                    <p id="solana-price" class="metric-value">$0.00</p>
+                </div>
+                <div class="metric-card">
                     <h3>DeFi TVL</h3>
-                    <p id="defi-tvl">$0B</p>
+                    <p id="defi-tvl" class="metric-value">$0B</p>
                 </div>
-                <div class="card">
-                    <h3>ETH Gas Price (Gwei)</h3>
-                    <p id="eth-gas-price">0</p>
-                </div>
-                <div class="card">
+                <div class="metric-card">
                     <h3>Active Addresses (24h)</h3>
-                    <p id="active-addresses">0</p>
+                    <p id="active-addresses" class="metric-value">0</p>
+                </div>
+                <div class="metric-card">
+                    <h3>ETH Gas Price (Gwei)</h3>
+                    <p id="eth-gas-price" class="metric-value">0</p>
                 </div>
             </div>
             <canvas id="adoptionChart" width="800" height="800"></canvas>
@@ -666,6 +724,7 @@
                         const newsItem = document.createElement('div');
                         newsItem.classList.add('news-item-dynamic');
                         newsItem.innerHTML = `
+                            <img src="${article.source_info.img}" alt="${article.source_info.name} Logo" title="${article.source_info.name}" style="width: 40px; height: 40px; margin-bottom: 10px;">
                             <h3>${article.title}</h3>
                             <a href="${article.url}" target="_blank" class="btn">Read More</a>
                         `;
